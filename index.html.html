@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>AnkaLife — Free Life Insurance Quote</title>
+<meta name="description" content="Answer a few quick questions and a licensed agent will find the right life insurance coverage for you. Free, no obligation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#082a2b; --navy-deep:#04211f; --teal:#0e6e64; --teal-2:#138b78; --gold:#e0a23c; --gold-2:#c8862a;
+  --sand:#f3ede0; --cream:#fbf7ef; --ink:#13211f; --muted:#5c6f6a; --line:#e6dfcf;
+  --good:#1f9d6b; --bad:#c0492f;
+  --font-display:'Fraunces',Georgia,serif; --font-body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;padding:26px 16px 46px;
+  background:radial-gradient(760px 600px at 12% 110%,rgba(19,139,120,.42),transparent 60%),
+    radial-gradient(900px 520px at 78% -8%,rgba(224,162,60,.30),transparent 60%),
+    linear-gradient(155deg,#04211f 0%,#082a2b 45%,#0c4540 100%);}
+.brand{color:#fff;display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;margin-bottom:6px}
+.brand .mark{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold-2));display:grid;place-items:center;color:var(--navy);font-weight:900}
+.brand span b{color:var(--gold)}
+.tag{color:#bcd2d8;font-size:13px;margin-bottom:20px}
+.form-card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:28px;max-width:620px;width:100%;
+  box-shadow:0 18px 48px -12px rgba(8,42,43,.4)}
+h1,h3{font-family:var(--font-display)}
+.progress{display:flex;gap:6px;margin-bottom:22px}
+.progress .seg{flex:1;height:6px;border-radius:6px;background:var(--line)}
+.progress .seg.on{background:var(--teal)}
+.q h3{font-size:19px;margin-bottom:4px}
+.qh{color:var(--muted);font-size:14px;margin-bottom:12px}
+.opts{display:grid;gap:10px}
+.opt{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;font-weight:600;display:flex;align-items:center;gap:12px;transition:.12s;background:#fff}
+.opt:hover{border-color:var(--teal);background:#f4faf9}
+.opt.sel{border-color:var(--teal);background:#eaf6f5}
+.opt .rad{width:20px;height:20px;border-radius:50%;border:2px solid var(--line);flex-shrink:0}
+.opt.sel .rad{border-color:var(--teal);background:var(--teal);box-shadow:inset 0 0 0 3px #fff}
+input[type=number],input[type=text],input[type=tel],input[type=email],select,textarea{
+  padding:13px;border:1.5px solid var(--line);border-radius:12px;width:100%;font-size:15px;font-family:inherit;background:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,107,107,.12)}
+.navrow{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;font-weight:700;font-size:14.5px;
+  border:none;cursor:pointer;font-family:inherit;transition:.15s;white-space:nowrap}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{background:var(--teal-2)}
+.btn-outline{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-weight:700;font-size:13.5px;margin-bottom:6px}
+.alert{border-radius:12px;padding:14px;margin:12px 0;font-size:14px}
+.alert.bad{background:#fbece8;border:1px solid #f0c2b5;color:#9c3a24}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--muted);background:var(--cream);
+  border:1px solid var(--line);border-radius:10px;padding:12px;margin:6px 0 14px;cursor:pointer}
+.consent input{width:18px;height:18px;margin-top:3px;flex-shrink:0;accent-color:var(--teal)}
+.trust{display:flex;justify-content:center;gap:18px;margin-top:16px;font-size:11.5px;color:#9fb8bf;flex-wrap:wrap}
+.trust span::before{content:"✓ ";color:var(--gold)}
+.done{text-align:center;padding:16px 0}
+.done .ic{font-size:48px;color:var(--teal)}
+.done h1{font-size:23px;margin:8px 0}
+.done p{color:var(--muted)}
+@media(max-width:560px){.two{grid-template-columns:1fr}.form-card{padding:20px}}
+</style>
+</head>
+<body>
+<div class="brand"><span class="mark">A</span><span>Anka<b>Life</b></span></div>
+<div class="tag">Free quote · Licensed agent · No obligation · ~2 minutes</div>
+<div class="form-card" id="card"></div>
+<div class="trust"><span>Licensed agent</span><span>Free &amp; no obligation</span><span>Your info is never sold</span></div>
+
+<script>
+/* ============================================================
+   ANKALIFE SURVEY — exact clone of the on-site questions,
+   wired to the Google Apps Script tracking backend.
+   Payload: {session, status:"partial"|"complete", step, answers, ts}
+   ============================================================ */
+var ENDPOINT = "https://script.google.com/macros/s/AKfycbxDkkI1mK4zqwwDxyMwCtWYfw2kKq_qy-1kexWuNlDIQQhRt5fb876p7bo0ow5qCx0e/exec";
+
+var session = 's' + Date.now() + Math.random().toString(36).slice(2,8);
+var SV = { step: 0, a: {} };
+var TIMES = [["morning","Morning (8am–12pm)"],["afternoon","Afternoon (12–5pm)"],["evening","Evening (5–9pm)"]];
+var STATES = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+
+/* --- The exact question set from ankalifeleads.com --- */
+var SVQ = [
+  {k:"timeframe", t:"When are you hoping to have coverage in place?", h:"Be honest — there's no wrong answer.",
+    o:[["asap","As soon as possible"],["30days","Within 30 days"],["90days:","In the next few months"],["researching","Just researching for now"]]},
+  {k:"coverage", t:"How much coverage are you looking for?", h:"Even a small policy can cover funeral costs and final bills — there's no amount too small.",
+    o:[["5-10k","$5,000 – $10,000"],["10-20k","$10,000 – $20,000"],["20-35k","$20,000 – $35,000"],["35-50k","$35,000 – $50,000"],["50-100k","$50,000 – $100,000"],["100-200k","$100,000 – $200,000"],["200k+","$200,000+"]]},
+  {k:"productType", t:"What type of life insurance are you looking for?", h:"Not sure? That's completely fine — your agent will recommend the best fit.",
+    o:[["term","Term life (lower cost, set period)"],["whole","Whole life / final expense (lifetime, builds value)"],["iul","Universal / IUL (flexible, cash value)"],["mortgage","Mortgage protection"],["dontknow","I'm not sure / I don't know"]]},
+  {k:"who", t:"Who is this coverage for?", h:"",
+    o:[["self","Myself"],["spouse","My spouse / partner"],["child","A child or grandchild"],["parent","A parent"],["family","My whole family"],["other","Someone else"]]},
+  {k:"dependents", t:"How many people depend on your income?", h:"This helps size the right coverage.",
+    o:[["0","Just me"],["1","1 person"],["2","2 people"],["3+","3 or more"]]},
+  {k:"trigger", t:"What's prompting you to look now?", h:"This helps us match the right policy.",
+    o:[["newbaby","New baby / growing family"],["mortgage","Mortgage / home"],["marriage","Marriage / partner"],["finalexpense","Cover funeral / final expenses"],["debt","Debt / income protection"],["none","No specific reason"]]},
+  {k:"military", t:"Have you or your spouse served in the U.S. military?", h:"Veterans and families may qualify for special programs.",
+    o:[["me","Yes — I served"],["spouse","Yes — my spouse served"],["no","No"]]},
+  {k:"branch", t:"Thank you for your service. Which branch?", h:"",
+    o:[["army","Army"],["navy","Navy"],["airforce","Air Force"],["marines","Marines"],["coastguard","Coast Guard"],["space","Space Force"]],
+    when:function(a){return a.military && a.military!=="no";}},
+  {k:"age", t:"What's your age?", h:"Rates are based largely on age.", type:"number"},
+  {k:"gender", t:"What's your gender?", h:"Carriers price rates differently by gender.",
+    o:[["female","Female"],["male","Male"]]},
+  {k:"health", t:"How would you describe your health?", h:"",
+    o:[["excellent","Excellent"],["good","Good"],["fair","Fair / some conditions"],["poor","Significant conditions"]]},
+  {k:"conditions", t:"Any of these conditions? (helps us match the right carrier)", h:"",
+    o:[["none","None of these"],["diabetes","Diabetes"],["heart","Heart condition"],["cancer","Cancer history"],["other","Other"]],
+    when:function(a){return a.health==="fair"||a.health==="poor";}},
+  {k:"tobacco", t:"Have you used tobacco or nicotine in the last 12 months?", h:"",
+    o:[["no","No"],["yes","Yes"]]},
+  {k:"existing", t:"Do you currently have life insurance?", h:"",
+    o:[["none","No coverage"],["some","Some, but not enough"],["old","An old policy I should review"]]},
+  {k:"existingCarrier", t:"Who is your current coverage with?", h:"It's okay if you're not 100% sure — but please have this ready when your agent calls, so we don't waste your time.",
+    o:[["mutualofomaha","Mutual of Omaha"],["statefarm","State Farm"],["newyorklife","New York Life"],["northwestern","Northwestern Mutual"],["massmutual","MassMutual"],["globe","Globe Life"],["colonialpenn","Colonial Penn"],["aarp","AARP / NY Life"],["other","Another carrier"],["dontknow","I don't know"]],
+    when:function(a){return a.existing && a.existing!=="none";}},
+  {k:"existingAmount", t:"About how much coverage do you currently have?", h:"A rough idea is perfectly fine — just try to have the exact figure for your agent.",
+    o:[["<10k","Under $10,000"],["10-25k","$10,000 – $25,000"],["25-50k","$25,000 – $50,000"],["50-100k","$50,000 – $100,000"],["100k+","$100,000+"],["dontknow","I don't know"]],
+    when:function(a){return a.existing && a.existing!=="none";}},
+  {k:"income", t:"What's your approximate household income?", h:"This lets your agent find a premium that comfortably fits your budget.",
+    o:[["150k+","$150,000+ / year"],["100-150k","$100,000 – $150,000"],["60-100k","$60,000 – $100,000"],["40-60k","$40,000 – $60,000"],["25-40k","$25,000 – $40,000"],["15-25k","$15,000 – $25,000"],["<15k","Under $15,000"]]},
+  {k:"likelihood", t:"If a licensed agent calls with a plan that fits your budget, how likely are you to put coverage in place?", h:"Be honest — it just helps us match you with the right advisor.",
+    o:[["ready","Very likely — I'm ready to get covered"],["soon","Likely, in the next few weeks"],["comparing","I'm comparing options / getting quotes"],["researching","Just researching for now"]]},
+  {k:"contact", t:"What time of day is best to reach you?", h:"Pick any that work. Times are in your local time zone.", type:"contact"},
+  {k:"notes", t:"Anything else your agent should know? (optional)", h:"For example: \"I work until 6pm,\" \"call my cell,\" or specific questions you have.", type:"text"}
+];
+
+function activeQs(){ return SVQ.filter(function(q){ return !q.when || q.when(SV.a); }); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+/* ---------- tracking beacons ---------- */
+function send(status, stepKey){
+  if(!ENDPOINT) return;
+  var payload = JSON.stringify({ session:session, status:status, step:stepKey||'', answers:SV.a, ts:new Date().toISOString() });
+  try{
+    if(navigator.sendBeacon){ navigator.sendBeacon(ENDPOINT, new Blob([payload],{type:'text/plain'})); }
+    else{ fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain'},body:payload,keepalive:true}); }
+  }catch(e){}
+}
+
+/* ---------- render ---------- */
+var card = document.getElementById('card');
+function render(){
+  var qs = activeQs();
+  if(SV.step >= qs.length){ renderContact(); return; }
+  var q = qs[SV.step];
+  var body = '';
+  if(q.type==="number"){
+    body = '<input id="sv_num" type="number" min="18" max="85" placeholder="Enter age" value="'+(SV.a.age||'')+'">';
+  } else if(q.type==="contact"){
+    body = '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">'
+      + TIMES.map(function(d){ return '<div class="opt '+((SV.a.times||[]).indexOf(d[0])>-1?'sel':'')+'" style="padding:11px 16px;flex:0 0 auto" onclick="svToggleTime(\''+d[0]+'\')">'+d[1]+'</div>'; }).join('')
+      + '</div>'
+      + '<label class="opt '+(SV.a.anytime?'sel':'')+'" style="margin-bottom:8px" onclick="svToggleAnytime();event.preventDefault()"><span class="rad"></span> Any time of day works for me</label>'
+      + '<label class="opt '+(SV.a.emailfirst?'sel':'')+'" onclick="svToggleEmail();event.preventDefault()"><span class="rad"></span> I\'d prefer to be emailed first</label>'
+      + '<div class="qh" style="margin-top:10px">Your phone number is collected on the next step.</div>';
+  } else if(q.type==="text"){
+    body = '<textarea id="sv_text" rows="4" placeholder="Type anything helpful here (optional)…" style="resize:vertical">'+esc(SV.a.notes||'')+'</textarea>';
+  } else {
+    body = '<div class="opts">'+q.o.map(function(o){
+      return '<div class="opt '+(SV.a[q.k]===o[0]?'sel':'')+'" onclick="pick(\''+q.k+'\',\''+o[0].replace(/'/g,"\\'")+'\')"><span class="rad"></span>'+o[1]+'</div>';
+    }).join('')+'</div>';
+  }
+  card.innerHTML =
+    '<div class="progress">'+qs.map(function(_,i){return '<span class="seg '+(i<=SV.step?'on':'')+'"></span>';}).join('')+'</div>'
+    +'<div class="q"><div class="qh">Step '+(SV.step+1)+' of '+qs.length+'</div><h3>'+q.t+'</h3><div class="qh">'+(q.h||'')+'</div>'+body+'</div>'
+    +'<div class="navrow"><button class="btn btn-outline" '+(SV.step===0?'disabled':'')+' onclick="svBack()">← Back</button>'
+    +(q.type==="number"?'<button class="btn btn-teal" onclick="svNumNext()">Continue →</button>':'')
+    +(q.type==="contact"?'<button class="btn btn-teal" onclick="svContactNext()">Continue →</button>':'')
+    +(q.type==="text"?'<button class="btn btn-teal" onclick="svTextNext()">Finish →</button>':'')
+    +'</div>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function pick(k,v){ SV.a[k]=v; send('partial',k); render(); setTimeout(function(){ SV.step++; render(); },180); }
+function svBack(){ if(SV.step>0){ SV.step--; render(); } }
+function svNumNext(){ var n=document.getElementById('sv_num').value, age=parseInt(n,10);
+  if(!age||age<18||age>85){ alert('Please enter an age between 18 and 85.'); return; }
+  SV.a.age=age; send('partial','age'); SV.step++; render(); }
+function svToggleTime(t){ SV.a.times=SV.a.times||[]; var i=SV.a.times.indexOf(t);
+  if(i>=0)SV.a.times.splice(i,1); else{ SV.a.times.push(t); SV.a.anytime=false; } render(); }
+function svToggleAnytime(){ SV.a.anytime=!SV.a.anytime; if(SV.a.anytime)SV.a.times=[]; render(); }
+function svToggleEmail(){ SV.a.emailfirst=!SV.a.emailfirst; render(); }
+function svContactNext(){
+  if(!SV.a.anytime && !(SV.a.times&&SV.a.times.length) && !SV.a.emailfirst){ alert('Please pick a time of day, "any time," or "email me first."'); return; }
+  send('partial','contact'); SV.step++; render(); }
+function svTextNext(){ var t=document.getElementById('sv_text'); if(t) SV.a.notes=t.value.trim();
+  send('partial','notes'); SV.step++; render(); }
+
+/* ---------- final contact step ---------- */
+function renderContact(){
+  card.innerHTML =
+    '<div style="text-align:center"><div style="font-size:46px;color:var(--good)">✓</div>'
+    +'<h1 style="font-size:24px;margin:6px 0">You\'re all set — one last step</h1>'
+    +'<p style="color:var(--muted)">Enter your details below and a licensed agent will reach out at your preferred time with real quotes built around your needs.</p></div>'
+    +'<h3 style="font-size:17px;margin:20px 0 10px">Where should your agent reach you?</h3>'
+    +'<div id="cErr"></div>'
+    +'<div class="two"><div class="field"><label>First name</label><input id="c_first" placeholder="First name" autocomplete="given-name"></div>'
+    +'<div class="field"><label>Last name</label><input id="c_last" placeholder="Last name" autocomplete="family-name"></div></div>'
+    +'<div class="two"><div class="field"><label>Phone</label><input id="c_phone" type="tel" placeholder="(555) 123-4567" autocomplete="tel"></div>'
+    +'<div class="field"><label>Email</label><input id="c_email" type="email" placeholder="you@email.com" autocomplete="email"></div></div>'
+    +'<div class="two"><div class="field"><label>State</label><select id="c_state"><option value="">Select…</option>'+STATES.map(function(s){return '<option>'+s+'</option>';}).join('')+'</select></div>'
+    +'<div class="field"><label>ZIP code</label><input id="c_zip" inputmode="numeric" maxlength="5" placeholder="ZIP"></div></div>'
+    +'<label class="consent"><input type="checkbox" id="c_consent">'
+    +'<span>By checking this box and clicking submit, I give my prior <b>express written consent</b> to be contacted by <b>AnkaLife</b> and its licensed agents at the phone number and email above — including by autodialer, prerecorded/AI voice, SMS, and email — about life insurance, even if my number is on a Do-Not-Call list. Consent isn\'t a condition of purchase; I can opt out anytime by replying STOP.</span></label>'
+    +'<button class="btn btn-teal" style="width:100%" onclick="submitSurvey()">Submit my survey</button>'
+    +'<p style="font-size:11.5px;color:var(--muted);margin-top:10px;text-align:center">🔒 Your information is sent only to a licensed agent. We never sell it to unverified parties.</p>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function val(id){ var e=document.getElementById(id); return e?e.value.trim():''; }
+function submitSurvey(){
+  var first=val('c_first'), last=val('c_last'), phone=val('c_phone'), email=val('c_email'), state=val('c_state'), zip=val('c_zip');
+  var consent=document.getElementById('c_consent').checked;
+  var err=document.getElementById('cErr');
+  var digits=phone.replace(/\D/g,'');
+  if(!first||!last){ err.innerHTML='<div class="alert bad">Please enter your first and last name.</div>'; return; }
+  if(!/^[2-9]\d{9}$/.test(digits.slice(-10))){ err.innerHTML='<div class="alert bad">Please enter a valid US phone number.</div>'; return; }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ err.innerHTML='<div class="alert bad">Please enter a valid email address.</div>'; return; }
+  if(!state){ err.innerHTML='<div class="alert bad">Please select your state.</div>'; return; }
+  if(zip && !/^\d{5}$/.test(zip)){ err.innerHTML='<div class="alert bad">Please enter a valid 5-digit ZIP code.</div>'; return; }
+  if(!consent){ err.innerHTML='<div class="alert bad">Please check the consent box — a licensed agent can only contact you with your permission.</div>'; return; }
+  SV.a.first_name=first; SV.a.last_name=last; SV.a.phone=digits; SV.a.email=email; SV.a.state=state; SV.a.zip=zip;
+  SV.a.tcpa_consent=true; SV.a.consent_ts=new Date().toISOString();
+  send('complete','submitted');
+  card.innerHTML = '<div class="done"><div class="ic">✈</div>'
+    +'<h1>Thanks, '+esc(first)+' — your survey is in!</h1>'
+    +'<p>Your answers are on their way to a licensed agent who will personally review them and reach out with your options — usually within one business day. This was a quick survey, not an instant quote. Keep an eye on your phone — the call may show as an unfamiliar number.</p></div>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+render();
+</script>
+</body>
+</html>
